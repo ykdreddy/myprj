@@ -1,20 +1,37 @@
-pipeline {
+pipeline{
     agent any
-    stages {
-        stage "build" {
+    parameters {
+        choice(name: 'VERSION', choices: ['1.0.2', '2.0,3.0', '4.50'], description: '')
+        booleanParam(name: 'executeTests', defaultvalues: true, description:'')
+    }
+       
+      stages{
+          stage "build" {
             steps {
-                sh "echo iam buiilding"
-            }
-        }
-        stage "test" {
+             "echo iam going"
+           }
+           
+         }   
+       stage "test" {
+           when {
+               expression {
+                 prams.executeTests
+               }
+           }
             steps {
-                sh "echo iam tetsing"
-            }
-        }
-        stage "deploy" {
+             echo "iam going"
+           }
+           
+         }   
+         stage "deploy" {
             steps {
-                sh "echo iam deploying"
-            }
-        }
+              
+              }
+             
+           }
+           
+         }   
+
+       }
     }
 }
